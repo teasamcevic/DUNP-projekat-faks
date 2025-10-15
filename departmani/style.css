@@ -1,0 +1,544 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 16px;
+}
+
+body {
+  width: 100vw;
+  height: 230vh;
+}
+
+.celaStranica {
+  width: 100%;
+  height: 100%;
+}
+
+.navigacija {
+  width: 100%;
+  height: 15%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  justify-content: space-between;
+  box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.1);
+  background-color: rgb(71, 99, 154);
+}
+
+.navigacija img {
+  width: 21rem;
+  height: 12rem;
+  margin-left: 0.5rem;
+  margin-top: -5rem;
+}
+
+.navigacija .linkovi {
+  display: flex;
+  padding-top: 1rem;
+  margin-left: 6rem;
+}
+.navigacija .linkovi a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding-right: 3rem;
+}
+.linkovi a:hover {
+  color: rgb(147, 24, 24);
+}
+.linkovi2 {
+  padding-top: 0.6rem;
+  padding-left: 5rem;
+}
+.prviRedNavigacije {
+  background-color: rgb(22, 44, 122);
+  color: white;
+  height: 27%;
+  margin-left: 40rem;
+  border-bottom-left-radius: 2rem;
+  display: flex;
+  padding-bottom: 1rem;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-icon {
+  margin-left: 17.5rem;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  z-index: 1;
+  padding: 0.625rem;
+}
+
+.search-input {
+  width: 0;
+  padding: 0.3125rem;
+  margin-left: 7rem;
+  margin-top: 0.7rem;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.3125rem;
+  outline: none;
+  transition: width 0.3s ease-in-out;
+  position: absolute;
+  left: 0; /* Pozicioniraj polje za pretragu na levu stranu ikone */
+  opacity: 0;
+  z-index: 0;
+  background-color: white;
+}
+
+.search-input.active {
+  width: 9.375rem; /* Polje se širi kad je aktivirano */
+  opacity: 1;
+}
+
+.search-text {
+  margin-left: 0.5rem;
+  margin-top: 0.7rem;
+  font-size: 1.5rem;
+}
+
+.drugiRedNavigacije {
+  background-color: rgb(71, 99, 154);
+  height: 57%;
+  display: flex;
+}
+
+.ikonice {
+  font-size: 1.7rem;
+  align-self: center;
+  padding-left: 10rem;
+  padding-top: 0.5rem;
+}
+.ikonice a {
+  color: white;
+  padding-left: 0.5rem;
+}
+
+.menu {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+}
+
+.centralni {
+  width: 100%;
+  height: 95%;
+  flex: 1;
+}
+
+.glavnaSlika {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.prviDeo img {
+  display: block;
+  width: 100%;
+  height: 49rem;
+  /* border-bottom-left-radius: 42rem;
+    border-bottom-right-radius: 42rem; */
+  object-fit: cover;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+.prviDeo .tekstPreko {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.tekstPreko h1 {
+  font-size: 3.3rem;
+  text-shadow: 0.2rem 0.2rem 0.3rem rgba(255, 255, 255, 0.5);
+}
+
+.drugiDeo {
+  width: 100%;
+  height: 50%;
+  margin-top: 5rem;
+  justify-content: space-around;
+  display: flex;
+}
+
+.drugiDeo1,
+.drugiDeo2 {
+  width: 40%;
+  height: 90%;
+  margin-top: 3rem;
+}
+.drugiDeo1 {
+  width: 45%;
+  padding-left: 5rem;
+  padding-top: 5rem;
+  border-right: 2px solid rgb(137, 137, 137);
+  color: rgb(22, 44, 122);
+}
+
+.sliciceIkonica img {
+  margin-top: 5rem;
+  width: 5.5rem;
+  height: 5rem;
+}
+.ikonica {
+  display: flex;
+}
+.ikonica1,
+.ikonica2,
+.h1 {
+  font-size: 1.5rem;
+  margin-top: 5rem;
+  margin-left: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  color: white;
+  background-color: rgb(147, 24, 24);
+  width: 12rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+  border-color: transparent;
+  cursor: pointer;
+  margin-top: 6rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.5);
+}
+button a {
+  color: white;
+  text-decoration: none;
+}
+button a:hover {
+  color: rgb(137, 137, 137);
+}
+
+.slikaPored img {
+  width: 90%;
+  height: 20rem;
+  margin-top: 5rem;
+  box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.5);
+}
+
+.tekstIspodSlike p {
+  color: rgb(22, 44, 122);
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5rem;
+  margin-right: 5rem;
+}
+
+.footer {
+  width: 100%;
+  height: 10rem;
+  margin-top: 10rem;
+}
+.donjiDeo1 {
+  width: 100%;
+  height: 10%;
+  background-color: rgb(111, 135, 183);
+  color: white;
+}
+.donjiDeo2 {
+  width: 100%;
+  height: 70%;
+  background-color: rgb(71, 99, 154);
+  display: flex;
+}
+
+.ikonice2 {
+  font-size: 2.3rem;
+  align-self: center;
+  padding-left: 5rem;
+  padding-top: 0.5rem;
+}
+.ikonice2 a {
+  color: white;
+  padding-left: 0.5rem;
+}
+
+.logo2 img {
+  width: 20rem;
+  height: 11rem;
+  padding-left: 10rem;
+}
+.logo2 {
+  margin-top: -2rem;
+}
+
+.donjiDeo2 .tekstoviPoredIkonica {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  padding-left: 5rem;
+  margin-left: 10rem;
+  padding-top: 1rem;
+}
+.tekstPoredIkonica1 p {
+  margin-top: 1rem;
+}
+
+.tekstPoredIkonica2 {
+  padding-left: 5rem;
+}
+
+.donjiDeo3 {
+  width: 100%;
+  height: 24%;
+  background-color: rgb(22, 44, 122);
+}
+
+.tekstZaCopyright p {
+  color: white;
+  text-align: center;
+  padding-top: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  margin-top: 6.1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header h1 {
+  font-size: 2em;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: #2c3e50;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+
+  font-size: 2.5em;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: #1f558b;
+  font-size: 1.5em;
+  margin-top: 10px;
+  margin-bottom: 70px;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.program-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.program-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.link-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.program-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.law-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.economics-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.philology-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.philosophy-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.natural-sciences-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.technical-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.biomedical-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.multidisciplinary-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.program-content {
+  padding: 25px;
+}
+
+.program-content h3 {
+  color: #2c3e50;
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.program-content ul {
+  list-style: none;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.program-content ul li {
+  margin-bottom: 8px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.program-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #3498db;
+}
+
+.contact-section {
+  background: white;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.icon-container {
+  flex-shrink: 0;
+}
+
+.info-icon {
+  width: 80px;
+  height: 80px;
+  background: #3498db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.contact-content h2 {
+  color: #2c3e50;
+  font-size: 1.4em;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.contact-content h3 {
+  color: #2c3e50;
+  font-size: 1.1em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.contact-content p {
+  color: #666;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.contact-content a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.contact-content a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.5em;
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-section {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+}

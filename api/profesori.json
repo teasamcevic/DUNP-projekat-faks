@@ -1,0 +1,30 @@
+[
+  {
+    "Id": 1,
+    "Ime": "Edin Dolicanin",
+    "Predmet": "Programiranje",
+    "Konsultacije": "Ponedeljak 10:00-12:00",
+    "Program": "Softversko inzenjerstvo"
+  },
+  {
+    "Id": 2,
+    "Ime": "Nedzad Mehic",
+    "Predmet": "Baze podataka",
+    "Konsultacije": "Utorak 10:00-12:00",
+    "Program": "Softversko inzenjerstvo"
+  },
+  {
+    "Id": 3,
+    "Ime": "Nedim Omerovic",
+    "Predmet": "Matematika",
+    "Konsultacije": "Sreda 10:00-12:00",
+    "Program": "Matematika"
+  },
+  {
+    "Id": 4,
+    "Ime": "Nazim Manic",
+    "Predmet": "Statika",
+    "Konsultacije": "Ponedeljak 10:00-12:00",
+    "Program": "Gradjenivarstvo"
+  }
+]
