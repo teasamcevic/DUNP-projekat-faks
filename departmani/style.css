@@ -87,14 +87,14 @@ body {
   outline: none;
   transition: width 0.3s ease-in-out;
   position: absolute;
-  left: 0; /* Pozicioniraj polje za pretragu na levu stranu ikone */
+  left: 0;
   opacity: 0;
   z-index: 0;
   background-color: white;
 }
 
 .search-input.active {
-  width: 9.375rem; /* Polje se širi kad je aktivirano */
+  width: 9.375rem;
   opacity: 1;
 }
 
@@ -146,8 +146,7 @@ body {
   display: block;
   width: 100%;
   height: 49rem;
-  /* border-bottom-left-radius: 42rem;
-    border-bottom-right-radius: 42rem; */
+  
   object-fit: cover;
 }
 .overlay {
@@ -540,5 +539,265 @@ button a:hover {
   .contact-section {
     flex-direction: column;
     padding: 30px 20px;
+  }
+}
+
+
+
+@media screen and (max-width: 480px) {
+  * { box-sizing: border-box; }
+  body { height: auto; overflow-x: hidden; }
+  .celaStranica { overflow-x: hidden; }
+
+  .navigacija {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    height: auto;
+    background: rgb(71, 99, 154);
+    z-index: 1000;
+  }
+
+  .prviRedNavigacije {
+    background: transparent;
+    color: #fff;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+  }
+
+  .prviRedNavigacije .linkovi { display: none !important; }
+
+  .prviRedNavigacije .search-container {
+    position: absolute;
+    top: .6rem;
+    right: 3rem;
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    z-index: 1003;
+  }
+
+  .prviRedNavigacije .search-icon { margin: 0; padding: .5rem; font-size: 1.25rem; }
+  .prviRedNavigacije .search-text { margin: 0; font-size: 1rem; line-height: 1; color: #fff; }
+
+  .prviRedNavigacije .search-input {
+    position: absolute;
+    top: 2.4rem;
+    right: 0;
+    width: 0;
+    opacity: 0;
+    margin: 0;
+    max-width: 60vw;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: .45rem .55rem;
+    background: #fff;
+    transition: width .25s ease, opacity .2s ease;
+    z-index: 1004;
+  }
+
+  .prviRedNavigacije .search-input.active { width: 12rem; opacity: 1; }
+
+  .drugiRedNavigacije {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .6rem 1rem;
+    height: auto;
+    background: rgb(71, 99, 154);
+  }
+
+  .drugiRedNavigacije img { width: 6rem; height: 3rem; margin: 0; flex: 0 0 auto; }
+
+  .menu {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    color: #fff;
+    position: absolute;
+    right: .6rem;
+    top: .3rem;
+    z-index: 1002;
+  }
+
+  .drugiRedNavigacije .linkovi {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: rgb(71, 99, 154);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: .5rem 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+    z-index: 1001;
+  }
+
+  .drugiRedNavigacije .linkovi.active { display: flex; }
+
+  .linkovi2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  .linkovi2 a {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,.2);
+    text-align: left;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .drugiRedNavigacije .ikonice { display: none; }
+
+
+  .centralni {
+    margin-top: 5.25rem;
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 20px 15px;
+    margin-top: 1rem;
+    overflow-x: hidden;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    padding: 0 10px;
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .program-card {
+    width: 100%;
+  }
+
+  .program-image {
+    height: 180px;
+  }
+
+  .program-content {
+    padding: 20px 15px;
+  }
+
+  .program-content h3 {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+  }
+
+  .program-content ul {
+    font-size: 0.85em;
+  }
+
+  .program-content ul li {
+    margin-bottom: 6px;
+  }
+
+  
+  .contact-section {
+    flex-direction: column;
+    padding: 25px 15px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  .contact-content h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+
+  .contact-content h3 {
+    font-size: 1em;
+    margin-top: 15px;
+  }
+
+  .contact-content p {
+    font-size: 0.9em;
+    margin-bottom: 6px;
+  }
+
+ 
+  .footer {
+    height: auto;
+    margin-top: 3rem;
+    overflow-x: hidden;
+  }
+  
+  .donjiDeo2 {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+  
+  .ikonice2 {
+    padding-left: 0;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+  
+  .tekstoviPoredIkonica {
+    flex-direction: column;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    padding-top: 1rem !important;
+    text-align: center;
+  }
+  
+  .tekstPoredIkonica1,
+  .tekstPoredIkonica2 {
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .logo2 {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .logo2 img {
+    padding-left: 0;
+    width: 15rem;
+    height: 8rem;
+  }
+  
+  .donjiDeo3 {
+    height: auto;
+    padding: 1rem;
+  }
+  
+  .tekstZaCopyright p {
+    font-size: 0.8rem;
+    padding: 1rem 0.5rem;
   }
 }
