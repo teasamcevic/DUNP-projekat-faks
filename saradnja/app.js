@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // Search toggle
+  // === 1) Search toggle ===
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Search functionality
+  // Search functionality with deduplication
   const normalize = (value) =>
     (value || "")
       .toString()
@@ -24,12 +24,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const getNavigableLinks = () => {
     const anchors = Array.from(document.querySelectorAll(".navigacija a"));
+    const seen = new Set();
     return anchors
       .map((a) => ({
         text: a.textContent ? a.textContent.trim() : "",
         href: a.getAttribute("href") || "",
       }))
-      .filter((item) => item.text.length > 0 && item.href.length > 0);
+      .filter((item) => {
+        if (item.text.length === 0 || item.href.length === 0) return false;
+        const key = `${item.text}|${item.href}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
   };
 
   const findBestMatch = (query, items) => {
@@ -71,15 +78,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Mobile dropdown toggle
+  // === 2) Mobile dropdown toggle ===
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
       if (searchInput) searchInput.classList.remove("active");
     });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
+        navLinks.classList.remove("active");
+      }
+    });
   }
 
-  // Dynamic search and links merging for mobile
+  // === 3) Dynamic search and links merging for mobile ===
   const firstRow = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow = document.querySelector(".drugiRedNavigacije");
@@ -88,13 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   let placeholder = null;
   let movedToSecondRow = false;
-  let mergedLinks = false;
 
   const moveToMobile = () => {
     if (!secondRow) return;
 
-    // Move search to second row
-    if (searchContainerOriginal && !movedToSecondRow) {
+    // Move search to second row (only if not already moved)
+    if (searchContainerOriginal && !movedToSecondRow && searchContainerOriginal.parentNode === firstRow) {
       placeholder = document.createComment("search-placeholder");
       searchContainerOriginal.parentNode.insertBefore(
         placeholder,
@@ -104,38 +117,58 @@ document.addEventListener("DOMContentLoaded", () => {
       movedToSecondRow = true;
     }
 
-    // Merge first row links into dropdown
-    if (linkovi2 && !mergedLinks && firstRowLinks.length) {
-      const titlesInDropdown = Array.from(linkovi2.querySelectorAll("a")).map(
-        (a) => a.textContent.trim()
-      );
-      Array.from(firstRowLinks).forEach((a, idx) => {
-        if (!titlesInDropdown.includes(a.textContent.trim())) {
-          const clone = a.cloneNode(true);
-          linkovi2.insertBefore(
-            clone,
-            linkovi2.children[idx] || linkovi2.firstChild
-          );
-        }
-      });
-      mergedLinks = true;
+    // Merge first row links into dropdown (only once)
+    if (linkovi2 && firstRowLinks.length) {
+      // Check if links are already present
+      const existingLinks = Array.from(linkovi2.querySelectorAll("a")).map(a => a.textContent.trim());
+      const firstRowTexts = Array.from(firstRowLinks).map(a => a.textContent.trim());
+      
+      // Check if all first row links are already in dropdown
+      const allLinksPresent = firstRowTexts.every(text => existingLinks.includes(text));
+      
+      if (!allLinksPresent) {
+        // Add only missing links
+        Array.from(firstRowLinks).reverse().forEach((a) => {
+          const linkText = a.textContent.trim();
+          if (!existingLinks.includes(linkText)) {
+            const clone = a.cloneNode(true);
+            clone.setAttribute('data-mobile-link', 'true');
+            linkovi2.insertBefore(clone, linkovi2.firstChild);
+          }
+        });
+      }
     }
   };
 
   const moveBackToDesktop = () => {
-    if (placeholder && movedToSecondRow) {
+    // Move search back to first row
+    if (placeholder && movedToSecondRow && placeholder.parentNode) {
       placeholder.parentNode.insertBefore(searchContainerOriginal, placeholder);
       placeholder.remove();
       placeholder = null;
       movedToSecondRow = false;
     }
+
+    // Remove mobile links from dropdown
+    if (linkovi2) {
+      const mobileLinks = linkovi2.querySelectorAll('[data-mobile-link="true"]');
+      mobileLinks.forEach(link => link.remove());
+    }
   };
 
   const applyResponsivePlacement = () => {
-    if (window.innerWidth <= 480) moveToMobile();
-    else moveBackToDesktop();
+    if (window.innerWidth <= 480) {
+      moveToMobile();
+    } else {
+      moveBackToDesktop();
+    }
   };
 
   applyResponsivePlacement();
-  window.addEventListener("resize", applyResponsivePlacement);
+  
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(applyResponsivePlacement, 100);
+  });
 });

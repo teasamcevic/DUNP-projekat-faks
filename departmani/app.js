@@ -21,12 +21,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const getNavigableLinks = () => {
     const anchors = Array.from(document.querySelectorAll(".navigacija a"));
+    const seen = new Set();
     return anchors
       .map((a) => ({
         text: a.textContent ? a.textContent.trim() : "",
         href: a.getAttribute("href") || "",
       }))
-      .filter((item) => item.text.length > 0 && item.href.length > 0);
+      .filter((item) => {
+        if (item.text.length === 0 || item.href.length === 0) return false;
+        const key = `${item.text}|${item.href}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
   };
 
   const findBestMatch = (query, items) => {
@@ -66,7 +73,6 @@ document.addEventListener("click", function (event) {
   }
 });
 
-
 document.addEventListener('DOMContentLoaded', function () {
   const menuBtn = document.querySelector('.menu');
   const dropdown = document.querySelector('.drugiRedNavigacije .linkovi');
@@ -74,14 +80,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const secondRowContainer = document.querySelector('.drugiRedNavigacije .linkovi2');
 
   if (menuBtn && dropdown && secondRowContainer) {
-   
-    firstRowLinks.forEach(link => {
-      const clone = link.cloneNode(true);
-      clone.style.borderBottom = "1px solid rgba(255,255,255,0.2)";
-      clone.style.padding = "1rem 1.25rem";
-      clone.style.color = "#fff";
-      secondRowContainer.insertBefore(clone, secondRowContainer.firstChild);
-    });
+    // Only clone links on mobile view
+    if (window.innerWidth <= 480) {
+      // Check if links haven't been cloned already
+      const existingClones = secondRowContainer.querySelectorAll('[data-cloned]');
+      if (existingClones.length === 0) {
+        firstRowLinks.forEach(link => {
+          const clone = link.cloneNode(true);
+          clone.setAttribute('data-cloned', 'true');
+          clone.style.borderBottom = "1px solid rgba(255,255,255,0.2)";
+          clone.style.padding = "1rem 1.25rem";
+          clone.style.color = "#fff";
+          secondRowContainer.insertBefore(clone, secondRowContainer.firstChild);
+        });
+      }
+    }
 
     menuBtn.addEventListener('click', function (e) {
       e.stopPropagation();

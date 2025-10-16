@@ -443,6 +443,12 @@ input::placeholder {
   margin-top: 30px;
   transition: background 0.3s ease, transform 0.2s ease;
 }
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  display: block;
+}
 
 .login-button:hover {
   background: rgb(191, 31, 31);
@@ -453,62 +459,272 @@ input::placeholder {
   transform: translateY(0);
 }
 
-@media (max-width: 1200px) {
-  .container {
-    gap: 100px;
+/* ========== RESPONSIVE ZA TELEFON (480px) ========== */
+@media screen and (max-width: 480px) {
+  * {
+    box-sizing: border-box;
   }
 
-  .left-section h1 {
-    font-size: 3em;
-  }
-}
-
-@media (max-width: 968px) {
   body {
-    padding: 40px 20px;
+    height: auto;
+    overflow-x: hidden;
   }
 
+  .celaStranica {
+    overflow-x: hidden;
+  }
+
+  /* NAVIGATION */
+  .navigacija {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: rgb(71, 99, 154);
+    z-index: 1000;
+  }
+
+  .prviRedNavigacije {
+    display: none !important;
+  }
+
+  .drugiRedNavigacije {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    height: auto;
+  }
+
+  .drugiRedNavigacije img {
+    width: 6rem;
+    height: 3rem;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  .drugiRedNavigacije .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: auto;
+    z-index: 1002;
+  }
+
+  .drugiRedNavigacije .search-icon {
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .drugiRedNavigacije .search-text {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .drugiRedNavigacije .search-input {
+    position: absolute;
+    top: 2.4rem;
+    right: 0;
+    width: 0;
+    opacity: 0;
+    margin: 0;
+    max-width: 60vw;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.45rem 0.55rem;
+    background: #fff;
+    transition: width 0.25s ease, opacity 0.2s ease;
+    z-index: 1004;
+  }
+
+  .drugiRedNavigacije .search-input.active {
+    width: 12rem;
+    opacity: 1;
+  }
+
+  .menu {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1003;
+    background: none;
+    border: 0;
+    color: #fff;
+    margin-left: 0.75rem;
+  }
+
+  .drugiRedNavigacije .ikonice {
+    display: none;
+  }
+
+  .drugiRedNavigacije .linkovi {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: rgb(71, 99, 154);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+  }
+
+  .drugiRedNavigacije .linkovi.active {
+    display: flex;
+  }
+
+  .linkovi2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  .linkovi2 a {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* MAIN CONTENT */
   .container {
     flex-direction: column;
-    gap: 40px;
+    padding: 30px 20px;
+    margin-top: 5.25rem;
+    padding-top: 2rem;
+    gap: 30px;
+    overflow-x: hidden;
   }
 
   .left-section {
-    text-align: center;
-    margin-left: 0;
     max-width: 100%;
-  }
-
-  .left-section h1 {
-    font-size: 2.5em;
-  }
-
-  .login-card {
-    margin-right: 0;
-    width: 100%;
-    max-width: 500px;
-  }
-}
-
-@media (max-width: 768px) {
-  body {
-    padding: 20px 15px;
+    margin-left: 0;
+    text-align: center;
   }
 
   .left-section h1 {
     font-size: 2em;
+    margin-bottom: 15px;
   }
 
   .left-section p {
     font-size: 1em;
+    line-height: 1.6;
   }
 
   .login-card {
-    padding: 35px 25px;
+    flex: 1;
     max-width: 100%;
+    width: 100%;
+    margin-right: 0;
+    padding: 35px 25px;
   }
 
   .login-title {
     font-size: 1.6em;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .input-wrapper {
+    padding: 12px;
+  }
+
+  .input-icon {
+    font-size: 1.1em;
+    margin-right: 10px;
+  }
+
+  input {
+    font-size: 0.95em;
+  }
+
+  .forgot-password {
+    margin-top: 6px;
+  }
+
+  .forgot-password a {
+    font-size: 0.85em;
+  }
+
+  .login-button {
+    padding: 13px;
+    font-size: 0.95em;
+    letter-spacing: 1.5px;
+    margin-top: 25px;
+  }
+
+  .error-message {
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+
+  /* FOOTER */
+  .footer {
+    height: auto;
+    margin-top: 3rem;
+    overflow-x: hidden;
+  }
+
+  .donjiDeo2 {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .ikonice2 {
+    padding-left: 0;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
+  .tekstoviPoredIkonica {
+    flex-direction: column;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    padding-top: 1rem !important;
+    text-align: center;
+  }
+
+  .tekstPoredIkonica1,
+  .tekstPoredIkonica2 {
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .logo2 {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .logo2 img {
+    padding-left: 0;
+    width: 15rem;
+    height: 8rem;
+  }
+
+  .donjiDeo3 {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .tekstZaCopyright p {
+    font-size: 0.8rem;
+    padding: 1rem 0.5rem;
   }
 }

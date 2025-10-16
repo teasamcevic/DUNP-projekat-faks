@@ -6,7 +6,7 @@
 .container {
   display: flex;
   height: 100%;
-  width: 100;
+  width: 100%;
 }
 
 .left-panel {
@@ -49,6 +49,7 @@ h1 {
   color: #2c3e50;
   text-transform: uppercase;
 }
+
 h1::after {
   content: "";
   position: absolute;
@@ -56,7 +57,6 @@ h1::after {
   left: 50px;
   width: 450px;
   height: 2px;
-
   font-size: 2em;
   font-weight: 300;
   letter-spacing: 2px;
@@ -85,6 +85,7 @@ h1::after {
   left: 0;
   color: #5a9bc7;
 }
+
 h3 {
   font-size: 1rem;
 }
@@ -163,21 +164,6 @@ h3 {
   line-height: 1.8;
 }
 
-@media (max-width: 968px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .left-panel,
-  .right-panel {
-    width: 100%;
-  }
-
-  .right-panel {
-    min-height: 100vh;
-  }
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -191,6 +177,7 @@ body {
   width: 100vw;
   height: 150vh;
 }
+
 .navigacija {
   width: 100%;
   height: 15%;
@@ -215,18 +202,22 @@ body {
   padding-top: 1rem;
   margin-left: 6rem;
 }
+
 .navigacija .linkovi a {
   color: rgb(255, 255, 255);
   text-decoration: none;
   padding-right: 3rem;
 }
+
 .linkovi a:hover {
   color: rgb(147, 24, 24);
 }
+
 .linkovi2 {
   padding-top: 0.6rem;
   padding-left: 5rem;
 }
+
 .prviRedNavigacije {
   background-color: rgb(22, 44, 122);
   color: white;
@@ -236,6 +227,7 @@ body {
   display: flex;
   padding-bottom: 1rem;
 }
+
 .search-container {
   display: flex;
   align-items: center;
@@ -261,14 +253,14 @@ body {
   outline: none;
   transition: width 0.3s ease-in-out;
   position: absolute;
-  left: 0; /* Pozicioniraj polje za pretragu na levu stranu ikone */
+  left: 0;
   opacity: 0;
   z-index: 0;
   background-color: white;
 }
 
 .search-input.active {
-  width: 9.375rem; /* Polje se širi kad je aktivirano */
+  width: 9.375rem;
   opacity: 1;
 }
 
@@ -290,6 +282,7 @@ body {
   padding-left: 10rem;
   padding-top: 0.5rem;
 }
+
 .ikonice a {
   color: white;
   padding-left: 0.5rem;
@@ -308,132 +301,19 @@ body {
   flex: 1;
 }
 
-.glavnaSlika {
-  position: relative;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-}
-
-.prviDeo img {
-  display: block;
-  width: 100%;
-  height: 49rem;
-  /* border-bottom-left-radius: 42rem;
-    border-bottom-right-radius: 42rem; */
-  object-fit: cover;
-}
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-}
-.prviDeo .tekstPreko {
-  color: white;
-  position: absolute;
-  top: 50%;
-  left: 52%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-.tekstPreko h1 {
-  font-size: 3.3rem;
-  text-shadow: 0.2rem 0.2rem 0.3rem rgba(255, 255, 255, 0.5);
-}
-
-.drugiDeo {
-  width: 100%;
-  height: 50%;
-  margin-top: 5rem;
-  justify-content: space-around;
-  display: flex;
-}
-
-.drugiDeo1,
-.drugiDeo2 {
-  width: 40%;
-  height: 90%;
-  margin-top: 3rem;
-}
-.drugiDeo1 {
-  width: 45%;
-  padding-left: 5rem;
-  padding-top: 5rem;
-  border-right: 2px solid rgb(137, 137, 137);
-  color: rgb(22, 44, 122);
-}
-
-.sliciceIkonica img {
-  margin-top: 5rem;
-  width: 5.5rem;
-  height: 5rem;
-}
-.ikonica {
-  display: flex;
-}
-.ikonica1,
-.ikonica2,
-.h1 {
-  font-size: 1.5rem;
-  margin-top: 5rem;
-  margin-left: 2rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-button {
-  color: white;
-  background-color: rgb(147, 24, 24);
-  width: 12rem;
-  height: 2.5rem;
-  font-size: 1.2rem;
-  border-radius: 2rem;
-  border-color: transparent;
-  cursor: pointer;
-  margin-top: 6rem;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 100;
-  box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.5);
-}
-button a {
-  color: white;
-  text-decoration: none;
-}
-button a:hover {
-  color: rgb(137, 137, 137);
-}
-
-.slikaPored img {
-  width: 90%;
-  height: 20rem;
-  margin-top: 5rem;
-  box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.5);
-}
-
-.tekstIspodSlike p {
-  color: rgb(22, 44, 122);
-  font-size: 1.5rem;
-  font-family: Arial, Helvetica, sans-serif;
-  margin-top: 5rem;
-  margin-right: 5rem;
-}
-
 .footer {
   width: 100%;
   height: 10rem;
   margin-top: 10rem;
 }
+
 .donjiDeo1 {
   width: 100%;
   height: 10%;
   background-color: rgb(111, 135, 183);
   color: white;
 }
+
 .donjiDeo2 {
   width: 100%;
   height: 70%;
@@ -447,6 +327,7 @@ button a:hover {
   padding-left: 5rem;
   padding-top: 0.5rem;
 }
+
 .ikonice2 a {
   color: white;
   padding-left: 0.5rem;
@@ -457,6 +338,7 @@ button a:hover {
   height: 11rem;
   padding-left: 10rem;
 }
+
 .logo2 {
   margin-top: -2rem;
 }
@@ -469,6 +351,7 @@ button a:hover {
   margin-left: 10rem;
   padding-top: 1rem;
 }
+
 .tekstPoredIkonica1 p {
   margin-top: 1rem;
 }
@@ -488,4 +371,291 @@ button a:hover {
   text-align: center;
   padding-top: 0.8rem;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========== RESPONSIVE SAMO ZA TELEFON (480px) ========== */
+@media screen and (max-width: 480px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    height: auto;
+    overflow-x: hidden;
+  }
+
+  .celaStranica {
+    overflow-x: hidden;
+  }
+
+  /* NAVIGATION - isto kao homepage */
+  .navigacija {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: rgb(71, 99, 154);
+    z-index: 1000;
+  }
+
+  .prviRedNavigacije {
+    display: none !important;
+  }
+
+  .drugiRedNavigacije {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    height: auto;
+  }
+
+  .drugiRedNavigacije img {
+    width: 6rem;
+    height: 3rem;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  /* Search + EN + Menu u istom redu */
+  .drugiRedNavigacije .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: auto;
+    z-index: 1002;
+  }
+
+  .drugiRedNavigacije .search-icon {
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .drugiRedNavigacije .search-text {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .drugiRedNavigacije .search-input {
+    position: absolute;
+    top: 2.4rem;
+    right: 0;
+    width: 0;
+    opacity: 0;
+    margin: 0;
+    max-width: 60vw;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.45rem 0.55rem;
+    background: #fff;
+    transition: width 0.25s ease, opacity 0.2s ease;
+    z-index: 1004;
+  }
+
+  .drugiRedNavigacije .search-input.active {
+    width: 12rem;
+    opacity: 1;
+  }
+
+  .menu {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1003;
+    background: none;
+    border: 0;
+    color: #fff;
+    margin-left: 0.75rem;
+  }
+
+  .drugiRedNavigacije .ikonice {
+    display: none;
+  }
+
+  .drugiRedNavigacije .linkovi {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: rgb(71, 99, 154);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+  }
+
+  .drugiRedNavigacije .linkovi.active {
+    display: flex;
+  }
+
+  .linkovi2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  .linkovi2 a {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* MAIN CONTENT */
+  .container {
+    flex-direction: column;
+    margin-top: 5.25rem;
+    overflow-x: hidden;
+  }
+
+  .left-panel {
+    width: 100%;
+    margin-top: 0;
+    padding: 30px 20px;
+  }
+
+  .left-panel h1 {
+    font-size: 1.8em;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .left-panel h1::after {
+    display: none;
+  }
+
+  .menu {
+    margin-bottom: 10px;
+  }
+
+  .menu li {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding-left: 15px;
+  }
+
+  .description {
+    margin-top: 30px;
+  }
+
+  .description p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .handshake {
+    text-align: center;
+  }
+
+  .handshake img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .right-panel {
+    width: 100%;
+    margin-top: 0;
+    padding: 30px 20px;
+    min-height: auto;
+  }
+
+  .info-box {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 20px 15px;
+  }
+
+  .info-box h2 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
+
+  .info-box h3 {
+    font-size: 0.95em;
+    margin-bottom: 12px;
+  }
+
+  .info-box ol {
+    margin-left: 15px;
+  }
+
+  .info-box ol li {
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .university-list {
+    font-size: 0.8em;
+  }
+
+  /* FOOTER - isto kao homepage */
+  .footer {
+    height: auto;
+    margin-top: 3rem;
+    overflow-x: hidden;
+  }
+
+  .donjiDeo2 {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .ikonice2 {
+    padding-left: 0;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
+  .tekstoviPoredIkonica {
+    flex-direction: column;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    padding-top: 1rem !important;
+    text-align: center;
+  }
+
+  .tekstPoredIkonica1,
+  .tekstPoredIkonica2 {
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .logo2 {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .logo2 img {
+    padding-left: 0;
+    width: 15rem;
+    height: 8rem;
+  }
+
+  .donjiDeo3 {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .tekstZaCopyright p {
+    font-size: 0.8rem;
+    padding: 1rem 0.5rem;
+  }
 }
