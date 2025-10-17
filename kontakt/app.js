@@ -1,123 +1,201 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = Array.from(document.querySelectorAll(".navigacija a"));
+  const searchIcon = document.querySelector(".search-icon");
   const searchInput = document.getElementById("search");
-  const langText = document.querySelector(".search-text p");
-  const containerLeft = document.querySelector(".container .left-section");
-  const containerRight = document.querySelector(".container .right-section");
-  const footerP = document.querySelector(".tekstPoredIkonica2 p");
+  const menuButton = document.querySelector(".menu");
+  const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
+  const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  const translations = {
-    sr: {
-      nav: [
-        "POČETNA",
-        "SARADNJA",
-        "PROJEKTI",
-        "UNIVERZITET",
-        "DEPARTMANI",
-        "STUDIRANJE",
-        "UPIS",
-        "KONTAKT",
-      ],
-      searchPlaceholder: "Pretraga...",
-      langSwitch: "EN",
-      container: {
-        h1: "O UNIVERZITETU",
-        paragraphs: [
-          "Državni univerzitet u Novom Pazaru je među novim državnim univerzitetima u Srbiji u aprilu 2008. godine akreditovan za izvođenje osnovnih, master i doktorskih akademskih studija.",
-          "Usledile su akreditacije 2013. i 2018. godine i nastava se izvodi na više od 30 studijskih programa.",
-          "Ova visokoškolska institucija sarađuje sa brojnim univerzitetima, institucijama, visokim školama i drugim naučno-istraživačkim institucijama u zemlji i inostranstvu.",
-          "Državni univerzitet ima dve zgrade, savremeno opremljene učionice i kabinete i 17 laboratorija sa modernom opremom, biblioteku sa čitaonicom i sportsku salu. Najveći broj studenata školuje se u trošku budžeta Republike Srbije.",
-          "Univerzitet je osnovan uz podršku drugih državnih univerziteta u Srbiji, sa ciljem stvaranja sopstvenog kadra.",
-        ],
-      },
-      containerRight: {
-        h2: "19 GODINA SA NAMA",
-        p: "DUNP spada među najmlađe visokoobrazovne ustanove u Srbiji. Osnovan je Odlukom Vlade Republike Srbije, 26. oktobra 2006. godine.",
-      },
-      footer: { email: "Elektronska pošta", phone: "Telefon", fax: "Faks" },
-    },
-    en: {
-      nav: [
-        "HOME",
-        "COOPERATION",
-        "PROJECTS",
-        "UNIVERSITY",
-        "DEPARTMENTS",
-        "STUDY",
-        "ADMISSION",
-        "CONTACT",
-      ],
-      searchPlaceholder: "Search...",
-      langSwitch: "SR",
-      container: {
-        h1: "ABOUT THE UNIVERSITY",
-        paragraphs: [
-          "The State University of Novi Pazar is among the new state universities in Serbia, accredited in April 2008 for undergraduate, master, and doctoral studies.",
-          "Accreditations were obtained in 2013 and 2018, and classes are conducted in more than 30 study programs.",
-          "This higher education institution collaborates with numerous universities, institutions, colleges, and research institutions in the country and abroad.",
-          "The State University has two buildings, modern classrooms and labs, 17 laboratories with modern equipment, a library with reading rooms, and a sports hall. Most students are government-funded.",
-          "The university was founded with support from other Serbian state universities, aiming to develop its own staff.",
-        ],
-      },
-      containerRight: {
-        h2: "19 YEARS WITH US",
-        p: "DUNP is among the youngest higher education institutions in Serbia. Founded by the Government of the Republic of Serbia on October 26, 2006.",
-      },
-      footer: { email: "Email", phone: "Phone", fax: "Fax" },
-    },
-  };
+  // === 0) Helperi za prevod (isti fazon kao na loginu) ===
+  const tr = (key) => (window.getTranslation ? window.getTranslation(key) : key);
+  const getLang = () => (document.documentElement.getAttribute("lang") || "sr");
 
-  // Učitaj jezik iz localStorage ili default
-  let currentLang = localStorage.getItem("siteLang") || "sr";
+  // Fallback-ovi ako u translations nedostaju poruke:
+  function M() {
+    const lng = getLang();
+    const t = window.translations?.[lng]?.kontakt?.messages || {};
+    return {
+      empty:   t.empty   || (lng === "en" ? "Please enter a message before sending." : "Molimo unesite poruku pre slanja."),
+      success: t.success || (lng === "en" ? "Your message was sent successfully!"     : "Poruka je uspešno poslata!"),
+      fail:    t.fail    || (lng === "en" ? "The message was not sent."               : "Poruka nije poslata."),
+      retry:   t.retry   || (lng === "en" ? "Please try again."                        : "Pokušajte ponovo."),
+    };
+  }
 
-  const setLanguage = (lang) => {
-    currentLang = lang;
-    localStorage.setItem("siteLang", lang);
-
-    navLinks.forEach((link, i) => {
-      if (translations[lang].nav[i])
-        link.textContent = translations[lang].nav[i];
+  // === 1) Search toggle ===
+  if (searchIcon && searchInput) {
+    searchIcon.addEventListener("click", () => {
+      searchInput.classList.toggle("active");
+      if (searchInput.classList.contains("active")) searchInput.focus();
     });
-    if (searchInput)
-      searchInput.placeholder = translations[lang].searchPlaceholder;
-    if (langText) langText.textContent = translations[lang].langSwitch;
+  }
 
-    if (containerLeft) {
-      const h1 = containerLeft.querySelector("h1");
-      const paragraphs = Array.from(containerLeft.querySelectorAll("p"));
-      if (h1) h1.textContent = translations[lang].container.h1;
-      paragraphs.forEach((p, i) => {
-        if (translations[lang].container.paragraphs[i])
-          p.textContent = translations[lang].container.paragraphs[i];
+  // Search functionality with deduplication
+  const normalize = (value) =>
+    (value || "")
+      .toString()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
+
+  const getNavigableLinks = () => {
+    const anchors = Array.from(document.querySelectorAll(".navigacija a"));
+    const seen = new Set();
+    return anchors
+      .map((a) => ({
+        text: a.textContent ? a.textContent.trim() : "",
+        href: a.getAttribute("href") || "",
+      }))
+      .filter((item) => {
+        if (item.text.length === 0 || item.href.length === 0) return false;
+        const key = `${item.text}|${item.href}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
       });
-    }
-
-    if (containerRight) {
-      const h2 = containerRight.querySelector(".image-caption h2");
-      const p = containerRight.querySelector(".image-caption p");
-      if (h2) h2.textContent = translations[lang].containerRight.h2;
-      if (p) p.textContent = translations[lang].containerRight.p;
-    }
-
-    if (footerP) {
-      let html = footerP.innerHTML;
-      html = html.replace(
-        /Elektronska pošta|Email/g,
-        translations[lang].footer.email
-      );
-      html = html.replace(/Telefon|Phone/g, translations[lang].footer.phone);
-      html = html.replace(/Faks|Fax/g, translations[lang].footer.fax);
-      footerP.innerHTML = html;
-    }
   };
 
-  // Klik na dugme jezika
-  langText.addEventListener("click", () => {
-    const newLang = currentLang === "sr" ? "en" : "sr";
-    setLanguage(newLang);
-    // localStorage čuva jezik → sve stranice prilikom reload-a koriste novi jezik
+  const findBestMatch = (query, items) => {
+    const q = normalize(query);
+    if (!q) return null;
+    const scored = items
+      .map((item) => {
+        const t = normalize(item.text);
+        let score = -1;
+        if (t === q) score = 3;
+        else if (t.startsWith(q)) score = 2;
+        else if (t.includes(q)) score = 1;
+        return { item, score };
+      })
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score);
+    return scored.length ? scored[0].item : null;
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const links = getNavigableLinks();
+        const match = findBestMatch(searchInput.value, links);
+        if (match) window.location.href = match.href;
+      }
+    });
+  }
+
+  // Close search when clicking outside
+  document.addEventListener("click", (event) => {
+    if (!searchIcon || !searchInput) return;
+    if (!searchIcon.contains(event.target) && !searchInput.contains(event.target)) {
+      searchInput.classList.remove("active");
+    }
   });
 
-  // Pri učitavanju stranice postavi jezik
-  setLanguage(currentLang);
+  // === 2) Mobile dropdown toggle ===
+  if (menuButton && navLinks) {
+    menuButton.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      if (searchInput) searchInput.classList.remove("active");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
+        navLinks.classList.remove("active");
+      }
+    });
+  }
+
+  // === 3) Dynamic search and links merging for mobile ===
+  const firstRow = document.querySelector(".prviRedNavigacije");
+  const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
+  const secondRow = document.querySelector(".drugiRedNavigacije");
+  const searchContainerOriginal = document.querySelector(".prviRedNavigacije .search-container");
+  let placeholder = null;
+  let movedToSecondRow = false;
+
+  const moveToMobile = () => {
+    if (!secondRow) return;
+
+    if (searchContainerOriginal && !movedToSecondRow && searchContainerOriginal.parentNode === firstRow) {
+      placeholder = document.createComment("search-placeholder");
+      searchContainerOriginal.parentNode.insertBefore(placeholder, searchContainerOriginal.nextSibling);
+      secondRow.insertBefore(searchContainerOriginal, menuButton);
+      movedToSecondRow = true;
+    }
+
+    if (linkovi2 && firstRowLinks.length) {
+      const existingLinks = Array.from(linkovi2.querySelectorAll("a")).map(a => a.textContent.trim());
+      const firstRowTexts = Array.from(firstRowLinks).map(a => a.textContent.trim());
+      const allLinksPresent = firstRowTexts.every(text => existingLinks.includes(text));
+      if (!allLinksPresent) {
+        Array.from(firstRowLinks).reverse().forEach((a) => {
+          const linkText = a.textContent.trim();
+          if (!existingLinks.includes(linkText)) {
+            const clone = a.cloneNode(true);
+            clone.setAttribute('data-mobile-link', 'true');
+            linkovi2.insertBefore(clone, linkovi2.firstChild);
+          }
+        });
+      }
+    }
+  };
+
+  const moveBackToDesktop = () => {
+    if (placeholder && movedToSecondRow && placeholder.parentNode) {
+      placeholder.parentNode.insertBefore(searchContainerOriginal, placeholder);
+      placeholder.remove();
+      placeholder = null;
+      movedToSecondRow = false;
+    }
+    if (linkovi2) {
+      const mobileLinks = linkovi2.querySelectorAll('[data-mobile-link="true"]');
+      mobileLinks.forEach(link => link.remove());
+    }
+  };
+
+  const applyResponsivePlacement = () => {
+    if (window.innerWidth <= 480) {
+      moveToMobile();
+    } else {
+      moveBackToDesktop();
+    }
+  };
+
+  applyResponsivePlacement();
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(applyResponsivePlacement, 100);
+  });
+
+  // === FORM VALIDATION (sa prevodom poruka) ===
+  const contactForm = document.querySelector(".contact-form form");
+  const messageInput = document.querySelector('textarea[name="message"]');
+
+  if (contactForm && messageInput) {
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const msg = messageInput.value.trim();
+      const { empty, success, fail, retry } = M();
+
+      if (!msg) {
+        alert(empty);
+        return;
+      }
+
+      try {
+        // Ako imaš backend, ovde pošalji pravi zahtev (fetch na tvoj endpoint).
+        // Ostavio sam "no-op" da ne puca bez servera:
+        // await fetch('/api/contact', { method: 'POST', body: JSON.stringify({ message: msg }) });
+
+        // Success:
+        messageInput.value = "";
+        alert(success);
+      } catch (err) {
+        // Fail:
+        console.error(err);
+        alert(`${fail} ${retry}`);
+      }
+    });
+  }
 });

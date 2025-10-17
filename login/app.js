@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
+  // === 0) Helperi za prevod (oslanja se na app-lang.js koji izlaže getTranslation i lang na <html>) ===
+  const tr = (key) => (window.getTranslation ? window.getTranslation(key) : key);
+  const getLang = () => (document.documentElement.getAttribute("lang") || "sr");
+  const T = (lng, key) => (window.translations?.[lng]?.login?.[key] || "");
+
   // === 1) Search toggle ===
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
@@ -171,9 +176,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const lockIcon = document.querySelector(".login-card .fa-lock");
 
   // Kreiraj SAMO JEDAN error span ispod password polja
-  const passwordFormGroup = passwordInput.closest(".form-group");
-  let errorSpan = passwordFormGroup.querySelector(".error-message");
-  if (!errorSpan) {
+  const passwordFormGroup = passwordInput?.closest(".form-group");
+  let errorSpan = passwordFormGroup?.querySelector(".error-message");
+  if (!errorSpan && passwordFormGroup) {
     errorSpan = document.createElement("span");
     errorSpan.classList.add("error-message");
     errorSpan.style.color = "red";
@@ -182,6 +187,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     errorSpan.style.marginTop = "5px";
     passwordFormGroup.appendChild(errorSpan);
   }
+
+  // === Auto-prevođenje već prikazane poruke kad promeniš jezik ===
+  const errorPairs = [
+    [T("sr","emptyUsernameError"),      T("en","emptyUsernameError")],
+    [T("sr","emptyPasswordError"),      T("en","emptyPasswordError")],
+    [T("sr","invalidCredentialsError"), T("en","invalidCredentialsError")],
+    [T("sr","passwordVisibilityError"), T("en","passwordVisibilityError")],
+  ];
+  function syncErrorLang() {
+    if (!errorSpan) return;
+    const txt = (errorSpan.textContent || "").trim();
+    for (const [srTxt, enTxt] of errorPairs) {
+      if (!srTxt || !enTxt) continue;
+      if (getLang() === "en" && txt === srTxt) { errorSpan.textContent = enTxt; break; }
+      if (getLang() === "sr" && txt === enTxt) { errorSpan.textContent = srTxt; break; }
+    }
+  }
+  // posmatraj promenu jezika (app-lang.js menja <html lang>)
+  new MutationObserver(syncErrorLang).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["lang"],
+  });
 
   let users = [];
   try {
@@ -195,7 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   lockIcon?.addEventListener("click", (e) => {
     e.preventDefault();
     if (!passwordInput?.value) {
-      errorSpan.textContent = "Morate da unesete lozinku da biste mogli da je vidite.";
+      errorSpan.textContent = tr("login.passwordVisibilityError");
       return;
     }
     errorSpan.textContent = "";
@@ -221,14 +248,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const email = (usernameInput?.value || "").trim();
     const password = (passwordInput?.value || "").trim();
 
-    // Validacija praznih polja
+    // Validacija praznih polja – PREVOD
     if (!email) {
-      errorSpan.textContent = "Molimo unesite email.";
+      errorSpan.textContent = tr("login.emptyUsernameError");
       return;
     }
 
     if (!password) {
-      errorSpan.textContent = "Molimo unesite lozinku.";
+      errorSpan.textContent = tr("login.emptyPasswordError");
       return;
     }
 
@@ -245,9 +272,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       localStorage.setItem("userEmail", user.email);
       window.location.href = "../truelogin/index.html";
     } else {
-      // Neuspešan login
+      // Neuspešan login – PREVOD
       localStorage.setItem("isLoggedIn", "false");
-      errorSpan.textContent = "Nevažeći email ili lozinka.";
+      errorSpan.textContent = tr("login.invalidCredentialsError");
     }
   });
 
