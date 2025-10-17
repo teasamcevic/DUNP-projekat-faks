@@ -87,14 +87,14 @@ body {
   outline: none;
   transition: width 0.3s ease-in-out;
   position: absolute;
-  left: 0; /* Pozicioniraj polje za pretragu na levu stranu ikone */
+  left: 0; 
   opacity: 0;
   z-index: 0;
   background-color: white;
 }
 
 .search-input.active {
-  width: 9.375rem; /* Polje se širi kad je aktivirano */
+  width: 9.375rem; 
   opacity: 1;
 }
 
@@ -391,7 +391,6 @@ button a:hover {
   font-size: 1.2rem;
 }
 
-/* ========== RESPONSIVE ZA TELEFON (480px) ========== */
 @media screen and (max-width: 480px) {
   * {
     box-sizing: border-box;
@@ -406,7 +405,7 @@ button a:hover {
     overflow-x: hidden;
   }
 
-  /* NAVIGATION */
+  
   .navigacija {
     position: fixed;
     top: 0;
@@ -529,7 +528,7 @@ button a:hover {
     text-decoration: none;
   }
 
-  /* MAIN CONTENT */
+  
   .container {
     margin-top: 6rem;
     padding: 20px 15px;
@@ -579,7 +578,7 @@ button a:hover {
     font-size: 1em;
   }
 
-  /* FOOTER */
+  
   .footer {
     height: auto;
     margin-top: 3rem;

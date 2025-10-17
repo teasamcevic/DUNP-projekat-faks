@@ -457,7 +457,7 @@ button a:hover {
   text-align: justify;
 }
 
-/* ========== RESPONSIVE ZA TELEFON (480px) ========== */
+
 @media screen and (max-width: 480px) {
   * {
     box-sizing: border-box;
@@ -472,7 +472,7 @@ button a:hover {
     overflow-x: hidden;
   }
 
-  /* NAVIGATION */
+ 
   .navigacija {
     position: fixed;
     top: 0;
@@ -595,7 +595,7 @@ button a:hover {
     text-decoration: none;
   }
 
-  /* MAIN CONTENT */
+  
   .container {
     display: flex;
     flex-direction: column;
@@ -681,7 +681,7 @@ button a:hover {
     margin-bottom: 12px;
   }
 
-  /* FOOTER */
+  
   .footer {
     height: auto;
     margin-top: 3rem;

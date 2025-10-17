@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // Provera login statusa
+ 
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   if (!isLoggedIn) {
     window.location.href = "../homepage/index.html";
   }
 
-  // === 1) Search toggle ===
+  
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Search functionality with deduplication
+  
   const normalize = (value) =>
     (value || "")
       .toString()
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Close search when clicking outside
+  
   document.addEventListener("click", (event) => {
     if (!searchIcon || !searchInput) return;
     if (
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // === 2) Mobile dropdown toggle ===
+ 
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 3) Dynamic search and links merging for mobile ===
+  
   const firstRow = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow = document.querySelector(".drugiRedNavigacije");

@@ -87,14 +87,14 @@ body {
   outline: none;
   transition: width 0.3s ease-in-out;
   position: absolute;
-  left: 0; /* Pozicioniraj polje za pretragu na levu stranu ikone */
+  left: 0; 
   opacity: 0;
   z-index: 0;
   background-color: white;
 }
 
 .search-input.active {
-  width: 9.375rem; /* Polje se širi kad je aktivirano */
+  width: 9.375rem; 
   opacity: 1;
 }
 
@@ -146,8 +146,6 @@ body {
   display: block;
   width: 100%;
   height: 49rem;
-  /* border-bottom-left-radius: 42rem;
-    border-bottom-right-radius: 42rem; */
   object-fit: cover;
 }
 .overlay {
@@ -479,7 +477,7 @@ button a:hover {
   margin-bottom: 16px;
 }
 
-/* ========== RESPONSIVE ZA TELEFON (480px) ========== */
+
 @media screen and (max-width: 480px) {
   * {
     box-sizing: border-box;
@@ -494,7 +492,7 @@ button a:hover {
     overflow-x: hidden;
   }
 
-  /* NAVIGATION */
+ 
   .navigacija {
     position: fixed;
     top: 0;
@@ -617,7 +615,7 @@ button a:hover {
     text-decoration: none;
   }
 
-  /* MAIN CONTENT */
+
   .container {
     flex-direction: column;
     margin-top: 5.25rem;
@@ -641,7 +639,7 @@ button a:hover {
     object-fit: cover;
   }
 
-  /* FILTERS */
+
   .filters {
     margin-bottom: 20px;
   }
@@ -664,7 +662,7 @@ button a:hover {
     padding: 10px;
   }
 
-  /* SECTIONS */
+  
   .program-section {
     margin-bottom: 40px;
   }
@@ -698,7 +696,7 @@ button a:hover {
     overflow-x: hidden;
   }
 
-  /* FOOTER */
+  
   .footer {
     height: auto;
     margin-top: 2rem;

@@ -426,7 +426,7 @@ h1::after {
   line-height: 1.6;
 }
 
-/* ========== RESPONSIVE ZA TELEFON (480px) ========== */
+
 @media screen and (max-width: 480px) {
   * {
     box-sizing: border-box;
@@ -441,7 +441,7 @@ h1::after {
     overflow-x: hidden;
   }
 
-  /* NAVIGATION */
+  
   .navigacija {
     position: fixed;
     top: 0;
@@ -564,7 +564,7 @@ h1::after {
     text-decoration: none;
   }
 
-  /* MAIN CONTENT */
+  
   .centralni {
     margin-top: 5.25rem;
     overflow-x: hidden;
@@ -635,7 +635,7 @@ h1::after {
     line-height: 1.5;
   }
 
-  /* FOOTER */
+  
   .footer {
     height: auto;
     margin-top: 3rem;

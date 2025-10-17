@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // === 1) Search toggle ===
+
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Search functionality with deduplication
+  
   const normalize = (value) =>
     (value || "")
       .toString()
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Close search when clicking outside
+ 
   document.addEventListener("click", (event) => {
     if (!searchIcon || !searchInput) return;
     if (
@@ -78,14 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // === 2) Mobile dropdown toggle ===
+ 
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
       if (searchInput) searchInput.classList.remove("active");
     });
 
-    // Close menu when clicking outside
+    
     document.addEventListener("click", (e) => {
       if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
         navLinks.classList.remove("active");
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 3) Dynamic search and links merging for mobile ===
+
   const firstRow = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow = document.querySelector(".drugiRedNavigacije");
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const moveToMobile = () => {
     if (!secondRow) return;
 
-    // Move search to second row (only if not already moved)
+    
     if (searchContainerOriginal && !movedToSecondRow && searchContainerOriginal.parentNode === firstRow) {
       placeholder = document.createComment("search-placeholder");
       searchContainerOriginal.parentNode.insertBefore(
@@ -117,17 +117,17 @@ document.addEventListener("DOMContentLoaded", () => {
       movedToSecondRow = true;
     }
 
-    // Merge first row links into dropdown (only once)
+    
     if (linkovi2 && firstRowLinks.length) {
-      // Check if links are already present
+   
       const existingLinks = Array.from(linkovi2.querySelectorAll("a")).map(a => a.textContent.trim());
       const firstRowTexts = Array.from(firstRowLinks).map(a => a.textContent.trim());
       
-      // Check if all first row links are already in dropdown
+    
       const allLinksPresent = firstRowTexts.every(text => existingLinks.includes(text));
       
       if (!allLinksPresent) {
-        // Add only missing links
+       
         Array.from(firstRowLinks).reverse().forEach((a) => {
           const linkText = a.textContent.trim();
           if (!existingLinks.includes(linkText)) {
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const moveBackToDesktop = () => {
-    // Move search back to first row
+    
     if (placeholder && movedToSecondRow && placeholder.parentNode) {
       placeholder.parentNode.insertBefore(searchContainerOriginal, placeholder);
       placeholder.remove();
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
       movedToSecondRow = false;
     }
 
-    // Remove mobile links from dropdown
+    
     if (linkovi2) {
       const mobileLinks = linkovi2.querySelectorAll('[data-mobile-link="true"]');
       mobileLinks.forEach(link => link.remove());

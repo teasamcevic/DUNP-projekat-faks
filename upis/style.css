@@ -87,14 +87,14 @@ body {
     outline: none;
     transition: width 0.3s ease-in-out;
     position: absolute;
-    left: 0; /* Pozicioniraj polje za pretragu na levu stranu ikone */
+    left: 0; 
     opacity: 0;
     z-index: 0;
     background-color: white;
 }
 
 .search-input.active {
-    width: 9.375rem; /* Polje se širi kad je aktivirano */
+    width: 9.375rem; 
     opacity: 1;
 }
 

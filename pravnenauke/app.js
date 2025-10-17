@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Close search when clicking outside
+  
   document.addEventListener("click", (event) => {
     if (!searchIcon || !searchInput) return;
     if (
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // === 2) Mobile dropdown toggle ===
+ 
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 3) Dynamic search and links merging for mobile ===
+  
   const firstRow = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow = document.querySelector(".drugiRedNavigacije");

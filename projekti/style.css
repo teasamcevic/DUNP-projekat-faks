@@ -346,7 +346,7 @@ body {
     flex-grow: 1;
 }
 
-/* ========== RESPONSIVE ZA TELEFON (480px) ========== */
+
 @media screen and (max-width: 480px) {
   * {
     box-sizing: border-box;
