@@ -1,12 +1,10 @@
-/* ===== app-lang.js (full strict mapping for all pages) ===== */
-/* global translations */
 
 (function () {
   const STORAGE_KEY = 'lang';
   const DEFAULT_LANG = 'sr';
   let currentLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
 
-  // helpers
+
   const qs  = (s, r=document) => r.querySelector(s);
   const qsa = (s, r=document) => Array.from(r.querySelectorAll(s));
   const setText = (el, v) => { if (el && typeof v === 'string') el.textContent = v; };
@@ -23,7 +21,7 @@
     return (typeof obj === 'string') ? obj : obj;
   }
 
-  // --- COMMON: NAV + FOOTER ---
+
   function applyNav() {
     const top = qsa('.prviRedNavigacije .linkovi a');
     if (top[0]) setText(top[0], t('nav.pocetna'));
@@ -52,7 +50,7 @@
     if (copy && t('footer.copyright')) setText(copy, t('footer.copyright'));
   }
 
-  // --- PAGE KEY ---
+ 
   function pageKey() {
     const p = location.pathname.toLowerCase();
     if (p.includes('/homepage/'))     return 'homepage';
@@ -70,9 +68,9 @@
     return 'homepage';
   }
 
-  // --- PAGES ---
+  
 
-  // HOMEPAGE
+  
   function applyHomepage() {
     const heroP = qsa('.tekstPreko h1 p');
     if (heroP[0] && t('homepage.welcomeTo')) setText(heroP[0], t('homepage.welcomeTo'));
@@ -371,7 +369,7 @@
     const clearBtn = qs('#clearBtn');
     if (clearBtn && t('konsultacije.clearBtn')) setText(clearBtn, t('konsultacije.clearBtn'));
 
-    // Observer za dinamički generisan sadržaj
+  
     const obs = new MutationObserver(() => {
       const emptyT = qs('.empty .title'); if (emptyT && t('konsultacije.noResults')) setText(emptyT, t('konsultacije.noResults'));
       const emptyM = qs('.empty .msg');   if (emptyM && t('konsultacije.noResultsMsg')) setText(emptyM, t('konsultacije.noResultsMsg'));
@@ -379,7 +377,6 @@
     obs.observe(document.body, { childList: true, subtree: true });
   }
 
-  // --- RUN PAGE-SPECIFIC ---
   function applyPageSpecific() {
     const key = pageKey();
     if (key === 'homepage')     return applyHomepage();
@@ -408,15 +405,15 @@
     const langP = qs('.search-container .search-text p');
     if (langP) setText(langP, (lang === 'sr') ? 'EN' : 'SR');
 
-    // NEW: obavesti druge skripte (npr. konsultacije.js) da se UI treba re-renderovati
+    
     window.dispatchEvent(new CustomEvent('language-changed', { detail: { lang } }));
   }
 
-  // eksport za druge skripte
+ 
   window.getTranslation = t;
   window.getCurrentLang = () => currentLang;
 
-  // init + toggle
+  
   document.addEventListener('DOMContentLoaded', () => {
     applyTranslations(currentLang);
 

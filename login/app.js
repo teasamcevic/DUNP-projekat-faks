@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // === 0) Helperi za prevod (oslanja se na app-lang.js koji izlaže getTranslation i lang na <html>) ===
+  
   const tr = (key) => (window.getTranslation ? window.getTranslation(key) : key);
   const getLang = () => (document.documentElement.getAttribute("lang") || "sr");
   const T = (lng, key) => (window.translations?.[lng]?.login?.[key] || "");
 
-  // === 1) Search toggle ===
+
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Search functionality with deduplication
   const normalize = (value) =>
     (value || "")
       .toString()
@@ -72,7 +71,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Close search when clicking outside
   document.addEventListener("click", (event) => {
     if (!searchIcon || !searchInput) return;
     if (
@@ -83,7 +81,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // === 2) Mobile dropdown toggle ===
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
@@ -97,7 +94,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // === 3) Dynamic search and links merging for mobile ===
   const firstRow = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow = document.querySelector(".drugiRedNavigacije");
@@ -169,13 +165,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     resizeTimeout = setTimeout(applyResponsivePlacement, 100);
   });
 
-  // === LOGIN LOGIKA ===
+  
   const loginForm = document.querySelector(".login-card form");
   const usernameInput = document.querySelector('.login-card input[type="text"]');
   const passwordInput = document.querySelector('.login-card input[type="password"]');
   const lockIcon = document.querySelector(".login-card .fa-lock");
 
-  // Kreiraj SAMO JEDAN error span ispod password polja
   const passwordFormGroup = passwordInput?.closest(".form-group");
   let errorSpan = passwordFormGroup?.querySelector(".error-message");
   if (!errorSpan && passwordFormGroup) {
@@ -188,7 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     passwordFormGroup.appendChild(errorSpan);
   }
 
-  // === Auto-prevođenje već prikazane poruke kad promeniš jezik ===
+ 
   const errorPairs = [
     [T("sr","emptyUsernameError"),      T("en","emptyUsernameError")],
     [T("sr","emptyPasswordError"),      T("en","emptyPasswordError")],
@@ -204,7 +199,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (getLang() === "sr" && txt === enTxt) { errorSpan.textContent = srTxt; break; }
     }
   }
-  // posmatraj promenu jezika (app-lang.js menja <html lang>)
+
   new MutationObserver(syncErrorLang).observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["lang"],
@@ -218,7 +213,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error loading users:", err);
   }
 
-  // Toggle password visibility
   lockIcon?.addEventListener("click", (e) => {
     e.preventDefault();
     if (!passwordInput?.value) {
@@ -229,7 +223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     passwordInput.type = passwordInput.type === "password" ? "text" : "password";
   });
 
-  // Clear errors on input
+
   usernameInput?.addEventListener("input", () => {
     errorSpan.textContent = "";
   });
@@ -238,17 +232,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     errorSpan.textContent = "";
   });
 
-  // Login form submit
+ 
   loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Clear previous error
     errorSpan.textContent = "";
 
     const email = (usernameInput?.value || "").trim();
     const password = (passwordInput?.value || "").trim();
 
-    // Validacija praznih polja – PREVOD
+  
     if (!email) {
       errorSpan.textContent = tr("login.emptyUsernameError");
       return;
@@ -259,7 +252,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Hash password i proveri credentials
+  
     const hashedPassword = await hashPassword(password);
 
     const user = users.find(
@@ -267,12 +260,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     if (user) {
-      // Uspešan login
+  
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userEmail", user.email);
       window.location.href = "../truelogin/index.html";
     } else {
-      // Neuspešan login – PREVOD
+    
       localStorage.setItem("isLoggedIn", "false");
       errorSpan.textContent = tr("login.invalidCredentialsError");
     }

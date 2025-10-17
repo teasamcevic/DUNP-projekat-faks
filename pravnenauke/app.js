@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // === 1) Search toggle ===
+ 
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Search functionality with deduplication
+ 
   const normalize = (value) =>
     (value || "")
       .toString()

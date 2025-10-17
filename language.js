@@ -1,6 +1,5 @@
 const translations = {
   sr: {
-    // === NAVIGATION ===
     nav: {
       pocetna: "POČETNA",
       saradnja: "SARADNJA",
@@ -14,7 +13,6 @@ const translations = {
     searchPlaceholder: "Pretraga...",
     langSwitch: "EN",
 
-    // === FOOTER (isti za sve stranice) ===
     footer: {
       address: "Vuka Karadžića 9<br>Novi Pazar 36300, Srbija",
       email: "Elektronska pošta",
@@ -24,11 +22,10 @@ const translations = {
         "Copyright © 2025 | Državni Univerzitet u Novom Pazaru | webdesigner: teasamcevic22@gmail.com",
     },
 
-    // === HOMEPAGE ===
     homepage: {
       welcomeTo: "DOBRODOŠLI NA",
       universityName: "DRŽAVNI UNIVERZITET",
-      graduation: "", // ikonica ostaje
+      graduation: "",
       inNoviPazar: "U NOVOM PAZARU",
       dunpTitle: "DUNP",
       dunpSubtitle: "Budi i ti deo naše priče!",
@@ -41,7 +38,6 @@ const translations = {
         "Od profesora i osoblja do studenata, Državni univerzitet u Novom Pazaru ima za cilj da pomogne svima da napreduju i ostvare svoj potencijal.",
     },
 
-    // === UNIVERZITET ===
     univerzitet: {
       title: "O UNIVERZITETU",
       paragraph1:
@@ -59,7 +55,6 @@ const translations = {
         "DUNP spada među najmlađe visokooobrazovne ustanove u Srbiji.<br>Osnovan je Odlukom Vlade Republike Srbije, 26. oktobra 2006. godine.",
     },
 
-    // === SARADNJA ===
     saradnja: {
       title: "SARADNJA",
       menu1: "Univerzitetska saradnja",
@@ -76,7 +71,6 @@ const translations = {
       internationalCoopSubtitle: "Linkovi ka stranim univerzitetima:",
     },
 
-    // === PROJEKTI ===
     projekti: {
       title: "PROJEKTI",
       mntr: "MNTR Srbija",
@@ -89,7 +83,6 @@ const translations = {
       erasmusDesc: "European Union (EU) student exchange programme",
     },
 
-    // === STUDIRANJE ===
     studiranje: {
       studiesTitle: "STUDIJE",
       oas: "Osnovne akademske studije",
@@ -115,7 +108,6 @@ const translations = {
         "Od tada, do danas, Studentski parlament Državnog univerziteta u Novom Pazaru se kontinualno razvijao. Sada je organizovan tako da je svaki studijski program povezan direktno sa Studentskim parlamentom, i na taj način je stvorena mogućnost da se efikasnije utiče na kvalitet nastavnog procesa na nivou celog Univerziteta. To je zahtevalo da se poveća broj studenata u okviru Studentskog parlamenta sa 15 članova na 21. Rad Studentskog parlamenta definisan je u Članu 56. Zakona o visokom obrazovanju.",
     },
 
-    // === UPIS ===
     upis: {
       ready: "SPREMNI",
       for: "ZA",
@@ -130,7 +122,6 @@ const translations = {
       website: "http://www.np.ac.rs",
     },
 
-    // === KONTAKT ===
     kontakt: {
       title: "KONTAKT",
       emailLabel: "Elektronska pošta:",
@@ -141,12 +132,10 @@ const translations = {
       messagePlaceholder: "Pošaljite poruku...",
       sendBtn: "Pošalji",
 
-      // DOPUNA:
       addressLine1: "Vuka Karadžića 9",
       addressLine2: "Novi Pazar 36300, Srbija",
     },
 
-    // === PRAVNE NAUKE (i ostali departmani) ===
     pravnenauke: {
       title: "PRAVNE NAUKE",
       paragraph1:
@@ -158,7 +147,6 @@ const translations = {
       mas: "Master akademskim studijama (MAS)",
     },
 
-    // === LOGIN ===
     login: {
       title: "PRIJAVA",
       usernamePlaceholder: "Korisničko ime",
@@ -171,20 +159,17 @@ const translations = {
       passwordVisibilityError:
         "Morate da unesete lozinku da biste mogli da je vidite.",
 
-      // DOPUNA:
       introTitle: "ULOGUJ SE!",
       introText:
         "Za pristup stranici o nastavnom osoblju i više infromacija o istom, potrebno je ulogovati se.",
     },
 
-    // === TRUELOGIN ===
     truelogin: {
       successMessage: "Uspešno ste ulogovani! Pristupite željenoj stranici.",
       consultationsTitle: "KONSULTACIJE",
       consultationsLink: "Konsultacije profesora po studijskim programima",
     },
 
-    // === KONSULTACIJE ===
     konsultacije: {
       allPrograms: "Svi programi",
       allDays: "Svi dani",
@@ -206,7 +191,6 @@ const translations = {
       noResultsMsg: "Nema rezultata. Pokušaj drugačiji filter ili pretragu.",
     },
 
-    // === DOPUNA: DEPARTMANI (cela sekcija) ===
     departmani: {
       heroTitle: "OSLOBODITE SVOJ POTENCIJAL",
       heroSubtitle:
@@ -218,11 +202,18 @@ const translations = {
         },
         ekonomske: {
           title: "Ekonomske nauke",
-          programs: ["Ekonomija (OAS)", "Ekonomija (MAS)", "Poslovna informatika (OAS)"],
+          programs: [
+            "Ekonomija (OAS)",
+            "Ekonomija (MAS)",
+            "Poslovna informatika (OAS)",
+          ],
         },
         filoloske: {
           title: "Filološke nauke",
-          programs: ["Srpski jezik i književnost (OAS)", "Engleski jezik i književnost (IAS)"],
+          programs: [
+            "Srpski jezik i književnost (OAS)",
+            "Engleski jezik i književnost (IAS)",
+          ],
         },
         filozofske: {
           title: "Filozofske nauke",
@@ -284,7 +275,7 @@ const translations = {
   },
 
   en: {
-    // === NAVIGATION ===
+   
     nav: {
       pocetna: "HOME",
       saradnja: "COOPERATION",
@@ -298,7 +289,7 @@ const translations = {
     searchPlaceholder: "Search...",
     langSwitch: "SR",
 
-    // === FOOTER ===
+    
     footer: {
       address: "Vuka Karadžića 9<br>Novi Pazar 36300, Serbia",
       email: "Email",
@@ -308,7 +299,7 @@ const translations = {
         "Copyright © 2025 | State University of Novi Pazar | webdesigner: teasamcevic22@gmail.com",
     },
 
-    // === HOMEPAGE ===
+ 
     homepage: {
       welcomeTo: "WELCOME TO",
       universityName: "STATE UNIVERSITY",
@@ -325,7 +316,7 @@ const translations = {
         "From professors and staff to students, State University of Novi Pazar aims to help everyone progress and reach their potential.",
     },
 
-    // === UNIVERZITET ===
+   
     univerzitet: {
       title: "ABOUT THE UNIVERSITY",
       paragraph1:
@@ -343,7 +334,7 @@ const translations = {
         "SUNP is among the youngest higher education institutions in Serbia.<br>It was founded by the Decision of the Government of the Republic of Serbia on October 26, 2006.",
     },
 
-    // === SARADNJA ===
+    
     saradnja: {
       title: "COOPERATION",
       menu1: "University cooperation",
@@ -360,11 +351,12 @@ const translations = {
       internationalCoopSubtitle: "Links to foreign universities:",
     },
 
-    // === PROJEKTI ===
+   
     projekti: {
       title: "PROJECTS",
       mntr: "MSTD Serbia",
-      mntrDesc: "Projects of the Ministry of Science and Technological Development of Serbia",
+      mntrDesc:
+        "Projects of the Ministry of Science and Technological Development of Serbia",
       wus: "WUS Austria",
       wusDesc: "World University Service (WUS) Austria",
       tempus: "TEMPUS",
@@ -373,7 +365,7 @@ const translations = {
       erasmusDesc: "European Union (EU) student exchange programme",
     },
 
-    // === STUDIRANJE ===
+   
     studiranje: {
       studiesTitle: "STUDIES",
       oas: "Undergraduate academic studies",
@@ -399,7 +391,7 @@ const translations = {
         "Since then, the Student Parliament of the State University of Novi Pazar has been continuously developing. It is now organized so that every study program is directly connected with the Student Parliament, thus creating an opportunity to more effectively influence the quality of the teaching process at the entire University level. This required an increase in the number of students within the Student Parliament from 15 to 21 members. The work of the Student Parliament is defined in Article 56 of the Law on Higher Education.",
     },
 
-    // === UPIS ===
+ 
     upis: {
       ready: "READY",
       for: "FOR",
@@ -414,7 +406,7 @@ const translations = {
       website: "http://www.np.ac.rs",
     },
 
-    // === KONTAKT ===
+    
     kontakt: {
       title: "CONTACT",
       emailLabel: "Email:",
@@ -425,12 +417,12 @@ const translations = {
       messagePlaceholder: "Send a message...",
       sendBtn: "Send",
 
-      // DOPUNA:
+  
       addressLine1: "Vuka Karadžića 9",
       addressLine2: "Novi Pazar 36300, Serbia",
     },
 
-    // === PRAVNE NAUKE ===
+ 
     pravnenauke: {
       title: "LAW SCIENCES",
       paragraph1:
@@ -442,7 +434,7 @@ const translations = {
       mas: "Master's academic studies (MAS)",
     },
 
-    // === LOGIN ===
+ 
     login: {
       title: "LOGIN",
       usernamePlaceholder: "Username",
@@ -452,22 +444,22 @@ const translations = {
       emptyUsernameError: "Please enter email.",
       emptyPasswordError: "Please enter password.",
       invalidCredentialsError: "Invalid email or password.",
-      passwordVisibilityError: "You must enter a password to be able to see it.",
+      passwordVisibilityError:
+        "You must enter a password to be able to see it.",
 
-      // DOPUNA:
+
       introTitle: "SIGN IN!",
       introText:
         "To access the teaching staff page and more information, please sign in.",
     },
 
-    // === TRUELOGIN ===
+   
     truelogin: {
       successMessage: "Successfully logged in! Access your desired page.",
       consultationsTitle: "CONSULTATIONS",
       consultationsLink: "Professor consultations by study programs",
     },
 
-    // === KONSULTACIJE ===
     konsultacije: {
       allPrograms: "All programs",
       allDays: "All days",
@@ -489,7 +481,7 @@ const translations = {
       noResultsMsg: "No results. Try different filters or search.",
     },
 
-    // === DOPUNA: DEPARTMANI (cela sekcija) ===
+   
     departmani: {
       heroTitle: "UNLEASH YOUR POTENTIAL",
       heroSubtitle:
@@ -501,7 +493,11 @@ const translations = {
         },
         ekonomske: {
           title: "Economic Sciences",
-          programs: ["Economics (UAS)", "Economics (MAS)", "Business Informatics (UAS)"],
+          programs: [
+            "Economics (UAS)",
+            "Economics (MAS)",
+            "Business Informatics (UAS)",
+          ],
         },
         filoloske: {
           title: "Philological Sciences",
@@ -570,7 +566,6 @@ const translations = {
   },
 };
 
-// Export za korišćenje u app.js fajlovima
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { translations };
 }

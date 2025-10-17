@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks     = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2     = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // === 1) Search toggle ===
+  
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Enter -> navigacija na najbliži link po nazivu
+
   const normalize = (value) =>
     (value || "")
       .toString()
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Zatvaranje searcha klikom van
+  
   document.addEventListener("click", (event) => {
     if (!searchIcon || !searchInput) return;
     if (!searchIcon.contains(event.target) && !searchInput.contains(event.target)) {
@@ -75,14 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // === 2) Mobile dropdown toggle ===
+
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
       if (searchInput) searchInput.classList.remove("active");
     });
 
-    // Zatvori meni klikom van
     document.addEventListener("click", (e) => {
       if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
         navLinks.classList.remove("active");
@@ -90,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 3) Dinamičko PREMEŠTANJE search-a i SPAJANJE linkova na telefonu ===
+
   const firstRow      = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow     = document.querySelector(".drugiRedNavigacije");
@@ -101,26 +100,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const moveToMobile = () => {
     if (!secondRow) return;
 
-    // 3a) Prebaci SEARCH u drugi red (ako već nije)
+   
     if (searchContainerOriginal && !movedToSecondRow && searchContainerOriginal.parentNode === firstRow) {
       placeholder = document.createComment("search-placeholder");
       searchContainerOriginal.parentNode.insertBefore(placeholder, searchContainerOriginal.nextSibling);
-      // Umetni search-container ispred hamburgera (pre .menu)
+  
       secondRow.insertBefore(searchContainerOriginal, menuButton);
       movedToSecondRow = true;
     }
 
-    // 3b) Ubaci linkove iz prvog reda u dropdown (na vrh liste), samo jednom
+    
     if (linkovi2 && firstRowLinks.length) {
-      // Proveri da li su linkovi već dodati
+
       const existingLinks = Array.from(linkovi2.querySelectorAll("a")).map(a => a.textContent.trim());
       const firstRowTexts = Array.from(firstRowLinks).map(a => a.textContent.trim());
       
-      // Proveri da li su već svi linkovi iz prvog reda u dropdownu
       const allLinksPresent = firstRowTexts.every(text => existingLinks.includes(text));
       
       if (!allLinksPresent) {
-        // Dodaj samo one linkove koji još nisu u dropdownu
+        
         Array.from(firstRowLinks).reverse().forEach((a) => {
           const linkText = a.textContent.trim();
           if (!existingLinks.includes(linkText)) {
@@ -134,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const moveBackToDesktop = () => {
-    // Vrati SEARCH nazad u prvi red
+ 
     if (placeholder && movedToSecondRow && placeholder.parentNode) {
       placeholder.parentNode.insertBefore(searchContainerOriginal, placeholder);
       placeholder.remove();
@@ -142,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       movedToSecondRow = false;
     }
 
-    // Ukloni mobile linkove iz dropdowna
+
     if (linkovi2) {
       const mobileLinks = linkovi2.querySelectorAll('[data-mobile-link="true"]');
       mobileLinks.forEach(link => link.remove());

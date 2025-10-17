@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // === 0) Helperi za prevod (isti fazon kao na loginu) ===
+
   const tr = (key) => (window.getTranslation ? window.getTranslation(key) : key);
   const getLang = () => (document.documentElement.getAttribute("lang") || "sr");
 
-  // Fallback-ovi ako u translations nedostaju poruke:
+
   function M() {
     const lng = getLang();
     const t = window.translations?.[lng]?.kontakt?.messages || {};
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // === 1) Search toggle ===
+  
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Search functionality with deduplication
   const normalize = (value) =>
     (value || "")
       .toString()
@@ -83,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Close search when clicking outside
   document.addEventListener("click", (event) => {
     if (!searchIcon || !searchInput) return;
     if (!searchIcon.contains(event.target) && !searchInput.contains(event.target)) {
@@ -91,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // === 2) Mobile dropdown toggle ===
+
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
@@ -105,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 3) Dynamic search and links merging for mobile ===
   const firstRow = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow = document.querySelector(".drugiRedNavigacije");
@@ -168,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeTimeout = setTimeout(applyResponsivePlacement, 100);
   });
 
-  // === FORM VALIDATION (sa prevodom poruka) ===
+  
   const contactForm = document.querySelector(".contact-form form");
   const messageInput = document.querySelector('textarea[name="message"]');
 
@@ -184,11 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        // Ako imaš backend, ovde pošalji pravi zahtev (fetch na tvoj endpoint).
-        // Ostavio sam "no-op" da ne puca bez servera:
-        // await fetch('/api/contact', { method: 'POST', body: JSON.stringify({ message: msg }) });
-
-        // Success:
+        
         messageInput.value = "";
         alert(success);
       } catch (err) {

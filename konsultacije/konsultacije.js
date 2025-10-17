@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelector(".drugiRedNavigacije .linkovi");
   const linkovi2 = document.querySelector(".drugiRedNavigacije .linkovi2");
 
-  // helpers for i18n
+
   const t = (k) => (window.getTranslation ? window.getTranslation(k) : null);
   const curLang = () =>
     document.documentElement.getAttribute("lang") || "sr";
 
-  // === 1) Search toggle ===
+
   if (searchIcon && searchInput) {
     searchIcon.addEventListener("click", () => {
       searchInput.classList.toggle("active");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Search functionality with deduplication
+
   const normalize = (value) =>
     (value || "")
       .toString()
@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Close search when clicking outside
   document.addEventListener("click", (event) => {
     if (!searchIcon || !searchInput) return;
     if (!searchIcon.contains(event.target) && !searchInput.contains(event.target)) {
@@ -80,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // === 2) Mobile dropdown toggle ===
+
   if (menuButton && navLinks) {
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
@@ -94,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 3) Dynamic search and links merging for mobile ===
+
   const firstRow = document.querySelector(".prviRedNavigacije");
   const firstRowLinks = firstRow ? firstRow.querySelectorAll(".linkovi a") : [];
   const secondRow = document.querySelector(".drugiRedNavigacije");
@@ -157,14 +156,13 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeTimeout = setTimeout(applyResponsivePlacement, 100);
   });
 
-  // ========== LOGIN GUARD ==========
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   if (!isLoggedIn) {
     window.location.href = "../homepage/index.html";
     return;
   }
 
-  // ========== KONSULTACIJE - FETCH + FILTRIRANJE + RENDER ==========
+ 
   const API_URL = "../api/profesori.json";
   const root = document.getElementById("consultationsRoot");
   const programSel = document.getElementById("programFilter");
@@ -175,14 +173,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const latinNoDiacritics = (s = "") =>
     s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D");
 
-  // ---- Program codes (stabilni), renderovani naziv ide iz translations
+
   const PROGRAM_CODE = {
     softwareEngineering: "softwareEngineering",
     mathematics: "mathematics",
     civilEngineering: "civilEngineering",
   };
 
-  // ✅ ROBUSTNIJE mapiranje – hvata softver/matemat/gradje(v|n) + tipfelere
+ 
   function getProgramCode(raw = "") {
     const n = latinNoDiacritics(String(raw)).toLowerCase();
     const s = n.replace(/\s+/g, "");

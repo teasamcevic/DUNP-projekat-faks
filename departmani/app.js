@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const secondRowContainer = document.querySelector('.drugiRedNavigacije .linkovi2');
 
   if (menuBtn && dropdown && secondRowContainer) {
-    // Only clone links on mobile view
+  
     if (window.innerWidth <= 480) {
-      // Check if links haven't been cloned already
+      
       const existingClones = secondRowContainer.querySelectorAll('[data-cloned]');
       if (existingClones.length === 0) {
         firstRowLinks.forEach(link => {
