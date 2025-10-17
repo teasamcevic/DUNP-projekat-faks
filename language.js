@@ -305,7 +305,7 @@ const translations = {
       universityName: "STATE UNIVERSITY",
       graduation: "",
       inNoviPazar: "OF NOVI PAZAR",
-      dunpTitle: "SUNP",
+      dunpTitle: "DUNP",
       dunpSubtitle: "Be part of our story!",
       studyProgramsCount: "30+",
       studyProgramsLabel: "Study programs",
